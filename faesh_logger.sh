@@ -4,9 +4,10 @@ get_date () {
 	echo $_date
 }
 
-new_logfile () {
+faeshlog () {
 	
 	# The first parameter (string) will be the prefix of the logfile
+	# The second parameter consists of the message to be logged
 
 	if [ -n "$1" ]; then	
 		# if the first parameter (filename prefix) has been specified
@@ -17,7 +18,7 @@ new_logfile () {
 
 	local filepath="logs/""$filename_prefix""_$(get_date).log"
 
-	touch $filepath
+	echo "$(date):$2" >> $filepath
 }
 
 clean_logs () {
@@ -63,3 +64,5 @@ clean_logs () {
 		fi
 	done
 }
+
+
