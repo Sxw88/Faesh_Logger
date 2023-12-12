@@ -2,25 +2,22 @@
 
 #### Main Principle: Keep it Simple & Stupid
 
-1. Create a log file a day
-2. Keep the log files for x days (configurable)
-3. Clean log files after x days
+1. Write to log file using a bash function - Log files naming convention: <log_prefix>_<date>.log
+2. Keep the log files for x days (configurable in retention.conf, can be overridden via the function)
+3. Remove the oldest log files after x days
 
 #### Logic flow:
-1. ~~New day, new log file is required to be created~~
-2. ~~Create new log file with today's date~~
+1. When writing logs to a log file, check if the log file already exists
+2. If yes, create a new log file - and clean up logs
 3. Check if oldest log file exceeds retention period
 	- if yes delete it
 
 #### Functions
-1. ~~new_logfile~~
-	- creates a new log file
+1. get_date
+	- get today's date
+2. get_retention_from_conf
+	- gets configured retention period from retention.conf
 2. clean_logs
 	- checks if oldest log file exceeds retention period
-3. ~~check_latest_log~~
-	- boolean statement
-	- checks if today's log has been created
 4. faeshlog
 	- writes to log
-5. get_date
-	- get today's date
